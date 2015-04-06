@@ -1,0 +1,18 @@
+public class Tiger extends Animal {
+   public int sleep() {
+      energy += 5;
+      return energy;
+   }
+
+   public int eat(FOOD food) {
+      switch (food) {
+         case GRAIN:
+         // Grain makes my tummy hurt
+            break;
+         default:
+            energy += 5;
+            break;
+      }
+      return energy;
+   }
+}

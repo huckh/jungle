@@ -1,0 +1,6 @@
+public class Monkey extends Animal {
+   public eat(FOOD food) {
+      energy += 2;
+      return energy;
+   }
+}

@@ -1,0 +1,7 @@
+public class Food {
+
+	private enum FOOD {
+		MEAT, FISH, BUGS, GRAIN
+	}
+
+}

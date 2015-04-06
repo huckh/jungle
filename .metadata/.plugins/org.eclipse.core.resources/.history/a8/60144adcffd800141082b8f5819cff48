@@ -1,0 +1,106 @@
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Random;
+
+public class Jungle {
+
+	private List<Animal> animals = new ArrayList<Animal>();
+
+	public Jungle() {
+		super();
+		Animal t = new Tiger();
+		animals.add(t);
+		Animal m = new Monkey();
+		animals.add(m);
+		Animal s = new Snake();
+		animals.add(s);
+	}
+
+	public static void main(String[] args) {
+		System.out.println("Welcome to the Jungle");
+		Jungle jungle = new Jungle();
+		jungle.soundOff();
+		jungle.doRandomAction();
+	}
+
+	public void soundOff() {
+		for (Animal animal : animals) {
+			animal.speak();
+		}
+	}
+
+	public void doRandomAction() {
+		System.out.println("Do Random Actions");
+		for (Animal animal : animals) {
+			animal.speak();
+			Method[] pmethods = Animal.class.getDeclaredMethods();
+			Method[] cmethods = animal.getClass().getDeclaredMethods();
+			
+			Map<String,Method> methods = new HashMap<String,Method>();
+			//System.out.println("Child Methods");
+			for (Method method : cmethods) {
+				//System.out.println("method = " + method.getName());
+				methods.put(method.getName(), method);
+			}
+			//System.out.println("Parent Methods");
+			for (Method method : pmethods) {
+				if (!methods.containsKey(method.getName())) {
+					//System.out.println("method = " + method.getName());
+					methods.put(method.getName(), method);
+				}
+			}
+			List<Method> allMethods = new ArrayList<Method>();
+			allMethods.addAll(methods.values());
+			
+		    Random randM = new Random();
+		    int randomMethod = randM.nextInt(allMethods.size());
+			
+		    Method method = allMethods.get(randomMethod);
+			try {
+				if (method.getParameterCount() == 0) {
+					method.invoke(animal);
+				} else {
+					
+					method.invoke(animal, Food.getRandomFood());
+				}
+			} catch (IllegalAccessException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IllegalArgumentException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (InvocationTargetException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+//			//System.out.println("All Methods");
+//			for (Method amethod : methods.values()) {
+//				System.out.println(amethod.getDeclaringClass() + " method = " + amethod.getName());
+//				//System.out.println("method = " + method.getName() + " takes " + method.getParameterCount() + " parameters");
+//				try {
+//					if (amethod.getParameterCount() == 0) {
+//						amethod.invoke(animal);
+//					} else {
+//						amethod.invoke(animal, Food.MEAT);
+//					}
+//				} catch (IllegalAccessException e) {
+//					// TODO Auto-generated catch block
+//					e.printStackTrace();
+//				} catch (IllegalArgumentException e) {
+//					// TODO Auto-generated catch block
+//					e.printStackTrace();
+//				} catch (InvocationTargetException e) {
+//					// TODO Auto-generated catch block
+//					e.printStackTrace();
+//				}
+//			}
+			System.out.println();
+		}
+	}
+
+}

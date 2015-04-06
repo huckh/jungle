@@ -1,0 +1,73 @@
+import java.lang.reflect.Method;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+public class Jungle {
+
+	private List<Animal> animals = new ArrayList<Animal>();
+
+	public Jungle() {
+		super();
+		Animal t = new Tiger();
+		animals.add(t);
+		Animal m = new Monkey();
+		animals.add(m);
+		Animal s = new Snake();
+		animals.add(s);
+	}
+
+	public static void main(String[] args) {
+		System.out.println("Welcome to the Jungle");
+		Jungle jungle = new Jungle();
+		jungle.soundOff();
+		jungle.doRandomAction();
+	}
+
+	public void soundOff() {
+		for (Animal animal : animals) {
+			animal.speak();
+		}
+	}
+
+	public void doRandomAction() {
+		for (Animal animal : animals) {
+			animal.speak();
+			Method[] pmethods = Animal.class.getDeclaredMethods();
+			Method[] cmethods = animal.getClass().getDeclaredMethods();
+			
+			Map<String,Method> methods = new HashMap<String,Method>();
+			//System.out.println("Parent Methods");
+			for (Method method : pmethods) {
+				//System.out.println("method = " + method.getName());
+				methods.put(method.getName(), method);
+			}
+			//System.out.println("Child Methods");
+			for (Method method : cmethods) {
+				//System.out.println("method = " + method.getName());
+				methods.put(method.getName(), method);
+			}
+			System.out.println("All Methods");
+			for (Method method : methods.values()) {
+				System.out.println("method = " + method.getName());
+			}
+
+//			try {
+//				methods[2].invoke(animal, Food.FISH);
+//			} catch (IllegalAccessException e) {
+//				// TODO Auto-generated catch block
+//				e.printStackTrace();
+//			} catch (IllegalArgumentException e) {
+//				// TODO Auto-generated catch block
+//				e.printStackTrace();
+//			} catch (InvocationTargetException e) {
+//				// TODO Auto-generated catch block
+//				e.printStackTrace();
+//			}
+			animal.speak();
+			System.out.println();
+		}
+	}
+
+}

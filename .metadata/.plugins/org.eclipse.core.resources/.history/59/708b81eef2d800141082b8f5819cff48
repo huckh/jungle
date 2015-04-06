@@ -1,0 +1,18 @@
+public class Animal {
+
+   int energy = 0;
+
+   public int speak() {
+      energy -= 3;
+   }
+   
+   public int sleep() {
+      energy += 10;
+   }
+
+   public int eat(FOOD food) {
+      energy += 5;
+   }
+
+}
+

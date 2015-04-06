@@ -1,0 +1,24 @@
+public class Tiger extends Animal {
+   
+	public int speak() {
+		System.out.println("Rawr");
+		return super.speak();
+	}
+
+	public int sleep() {
+      energy += 5;
+      return energy;
+   }
+
+   public int eat(Food food) {
+      switch (food.value()) {
+         case GRAIN:
+         // Grain makes my tummy hurt
+            break;
+         default:
+            energy += 5;
+            break;
+      }
+      return energy;
+   }
+}

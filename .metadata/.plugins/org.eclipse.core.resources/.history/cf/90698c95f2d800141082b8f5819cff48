@@ -1,0 +1,1 @@
+public enum FOOD { MEAT, FISH, BUGS, GRAIN }   

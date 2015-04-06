@@ -1,0 +1,18 @@
+public class Monkey extends Animal {
+
+	public int eat(Food food) {
+		energy += 2;
+		return energy;
+	}
+
+	public int play() {
+		if (energy >= 8) {
+			System.out.println("Oooo Oooo Oooo");  
+			energy -= 8;
+		} else {
+			System.out.println("Monkey is too tired");  
+		}
+		return energy;
+	}
+
+}
